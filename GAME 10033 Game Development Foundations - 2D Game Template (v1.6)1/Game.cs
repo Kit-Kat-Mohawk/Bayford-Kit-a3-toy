@@ -10,7 +10,7 @@ namespace MohawkGame2D
     /// </summary>
     public class Game
     {
-        Color[] colors = {
+        Color[] colors = { 
             Color.Cyan,
             Color.Yellow,
             Color.Red,
@@ -18,7 +18,7 @@ namespace MohawkGame2D
             Color.Blue,
         };
 
-        int ghostpositionX = 0; 
+        int ghostposition = 0; 
 
 
         /// <summary>
@@ -37,14 +37,23 @@ namespace MohawkGame2D
         {
             Window.ClearBackground(0);
 
+            if (Input.IsMouseButtonPressed(MouseButton.Left))
+            {
+                ghostposition++;
+                if (ghostposition >= colors.Length)
+                {
+                    ghostposition = 0;
+                }
+            }
+
             Draw.FillColor = Color.White;
             Draw.LineSize = 5;
             Draw.LineColor = Color.Black;
-            DrawGhost(200, 160, colors[0]);
-            DrawGhost(110, 300, colors[1]);
-            DrawGhost(340, 300, colors[2]);
-            DrawGhost(340, 40, colors[3]);
-            DrawGhost(80, 100, colors[4]);
+            DrawGhost(200, 160, colors[ghostposition]);
+            DrawGhost(110, 300, colors[(1 + ghostposition) % colors.Length]);
+            DrawGhost(340, 300, colors[(2 + ghostposition) % colors.Length]);
+            DrawGhost(340, 40, colors[(3 + ghostposition) % colors.Length]);
+            DrawGhost(80, 100, colors[(4 + ghostposition) % colors.Length]);
 
 
         }
